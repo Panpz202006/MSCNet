@@ -20,4 +20,4 @@ Two - experiment setting:
  (1)main.py: the entrance function of programs.
  (2)train.py: train model.
  (3)utils/lossfunction: get_metrics function is used for calculating metrics.
- (4)Note: If your data path is different with the operation of  dataset/dataset.py, you can alter the code relating dataset path in dataset/dataset.py.
+ (4)Note: If your data path is different with the operation of  dataset/dataset.py, you can alter the code relating dataset path in dataset/dataset.py. 
