@@ -1,22 +1,20 @@
-1.数据集准备：
-    （1）将ISIC2017、ISIC2018、PH2数据集放入文件夹data目录下
-    （2）进入main函数，修改以下两条代码中的路径中的数据集名称，即可运行指定数据集：
-		train_datasets_path=os.path.join(cwd_path,'data','ISIC2018','train')
-    		val_datasets_path=os.path.join(cwd_path,'data','ISIC2018','test')
-    （3）数据集的路径结构：
-		data:
-			train:
-				images:
-				gt:
-			test:
-				images:
-				gt:
-     (4) 在测试时，将test作为验证集和测试集。
-     (5) ISIC2018和ISIC2018数据集下载链接：https://challenge.isic-archive.com/data/#2017, PH2数据集下载链接：https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1
+1.The introduction of models:
+ (1)CNN_* are CNN-based models. Mamba_* are Mamba-based models.
 
-2.模型运行：
-    （1）进入main函数，直接运行即可
+2.Prepare datasets：
+ (1)Push datastes to the data folder.
+ (2)The datasets link are as follows:
+      ISIC2017: https://challenge.isic-archive.com/data/#2017 
+      ISIC2018: https://challenge.isic-archive.com/data/#2018
+      PH2: https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1
+ (3)Note: Alter your dataset path according to dataset/datasets.py.
 
-3. 运行结果查看：
-    （1）进入log文件夹，即可查看运行情况与结果
+3.Run codes:
+ (1)Enter the main function, and then run it. 
+
+4.The introduction of python files:
+ (1)main.py: the entrance function of programs.
+ (2)train.py: train model.
+ (3)utils/lossfunction: get_metrics function is used for calculating metrics.
+ (4)Note: If your data path is different with the operation of  dataset/dataset.py, you can alter the code relating dataset path in dataset/dataset.py.
 
