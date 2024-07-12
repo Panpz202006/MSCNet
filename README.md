@@ -1,4 +1,4 @@
-One - Abstract:
+One - Abstract: 
     This paper proposes the Context Enhanced Network (CENet). In the encoder stage, CENet retains low-level detail information, providing essential detail information for the final prediction results. In the decoder stage, MSC extracts multi-scale information through multiple dilation rates and different sizes to focus on both local and global information. Dynamic edge enhancement (EE) is achieved to reduce the impact of blurred edges on the final results. CF is used to fuse high-level semantic information and low-level detail information. To evaluate the effectiveness of CENet, we conducted experiments on the ISIC2018, ISIC2017, and PH2 dataset.
 
 Two - experiment setting:
