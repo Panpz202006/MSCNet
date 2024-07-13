@@ -4,7 +4,7 @@ from loader import get_loader
 from micro import CNN, MAMBA, TRAIN, TRANSFORMER, VAL
 from models.Model import Model
 sys.path.append(os.getcwd())
-from utils.loss_function import BceIOULoss
+from utils.loss_function import BceDiceLoss, BceIOULoss
 from utils.tools import get_logger, set_cuda,calculate_params_flops
 import torch
 from train_val_epoch import train_epoch,val_epoch
@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "--datasets",
     type=str,
-    default="ISIC2018",
+    default="PH2",
     help="input datasets name including ISIC2017, ISIC2018, and PH2",
 )
 parser.add_argument(
@@ -26,7 +26,7 @@ parser.add_argument(
 parser.add_argument(
     "--batchsize",
     type=int,
-    default="8",
+    default="10",
     help="input batch_size",
 )
 parser.add_argument(
@@ -44,7 +44,7 @@ parser.add_argument(
 parser.add_argument(
     "--continues",
     type=int,
-    default=0,
+    default=1,
     help="1: continue to run; 0: don't continue to run",
 )
 parser.add_argument(
@@ -65,10 +65,10 @@ def get_model():
     return model
 
 def continue_train(model,optimizer):
-    path=os.path.join(os.path.join(os.getcwd(),args.checkpoint))
+    path=os.path.join(os.getcwd(),args.checkpoint,'last.pth')
     if not os.path.exists(path):
         os.makedirs(path)
-    loaded_data = torch.load(path, 'last.pth')
+    loaded_data = torch.load(path)
     start_epoch=int(loaded_data['epoch'])+1
     min_loss=float(loaded_data['min_loss'])
     model.load_state_dict(loaded_data['model_state_dict'])
@@ -90,7 +90,7 @@ def train(args):
     #calculate parameters and flops
     calculate_params_flops(model,size=args.imagesize,logger=logger)
     #set loss function
-    criterion=BceIOULoss()
+    criterion=BceDiceLoss()
     #set optim
     optimizer = torch.optim.Adam(model.parameters(), 1e-4)
     #running settings

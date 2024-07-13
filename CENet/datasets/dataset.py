@@ -11,15 +11,19 @@ class ISIC2018_Datasets(Dataset):
     def __init__(self,mode,transformer):
         super().__init__()
         cwd=os.getcwd()
-        if mode==TRAIN:
-            gts_path=os.path.join(cwd,'data','ISIC2018','ISIC2018_Task1_Training_GroundTruth','ISIC2018_Task1_Training_GroundTruth')
-            images_path=os.path.join(cwd,'data','ISIC2018','ISIC2018_Task1-2_Training_Input','ISIC2018_Task1-2_Training_Input')
-        elif mode==VAL:
-            gts_path=os.path.join(cwd,'data','ISIC2018','ISIC2018_Task1_Validation_GroundTruth','ISIC2018_Task1_Validation_GroundTruth')
-            images_path=os.path.join(cwd,'data','ISIC2018','ISIC2018_Task1-2_Validation_Input','ISIC2018_Task1-2_Validation_Input')
-        elif mode==TEST:
-            gts_path=os.path.join(cwd,'data','ISIC2018','ISIC2018_Task1_Test_GroundTruth','ISIC2018_Task1_Test_GroundTruth')
-            images_path=os.path.join(cwd,'data','ISIC2018','ISIC2018_Task1-2_Test_Input','ISIC2018_Task1-2_Test_Input')
+        ''' 按照Inter-Scale Dependency Modeling for Skin Lesion Segmentation with Transformer-based Network, 划分数据集
+        '''
+        # if mode==TRAIN:
+        #     gts_path=os.path.join(cwd,'data','ISIC2018','ISIC2018_Task1_Training_GroundTruth','ISIC2018_Task1_Training_GroundTruth')
+        #     images_path=os.path.join(cwd,'data','ISIC2018','ISIC2018_Task1-2_Training_Input','ISIC2018_Task1-2_Training_Input')
+        # elif mode==VAL:
+        #     gts_path=os.path.join(cwd,'data','ISIC2018','ISIC2018_Task1_Validation_GroundTruth','ISIC2018_Task1_Validation_GroundTruth')
+        #     images_path=os.path.join(cwd,'data','ISIC2018','ISIC2018_Task1-2_Validation_Input','ISIC2018_Task1-2_Validation_Input')
+        # elif mode==TEST:
+        #     gts_path=os.path.join(cwd,'data','ISIC2018','ISIC2018_Task1_Test_GroundTruth','ISIC2018_Task1_Test_GroundTruth')
+        #     images_path=os.path.join(cwd,'data','ISIC2018','ISIC2018_Task1-2_Test_Input','ISIC2018_Task1-2_Test_Input')
+        gts_path=os.path.join(cwd,'data','ISIC2018','ISIC2018_Task1_Training_GroundTruth','ISIC2018_Task1_Training_GroundTruth')
+        images_path=os.path.join(cwd,'data','ISIC2018','ISIC2018_Task1-2_Training_Input','ISIC2018_Task1-2_Training_Input')
         
         images_list=sorted(os.listdir(images_path))
         images_list = [item for item in images_list if "jpg" in item]
@@ -31,7 +35,14 @@ class ISIC2018_Datasets(Dataset):
             mask_path=gts_path+'/'+gts_list[i]
             self.data.append([image_path, mask_path])
         self.transformer=transformer
-    
+        if mode==TRAIN:
+            self.data=self.data[:1815]
+        elif mode==VAL:
+            self.data=self.data[1815:2074]
+        elif mode==TEST:
+            self.data=self.data[2074:2594]
+        
+        print(len(self.data))
     def __getitem__(self, index):
         image_path, gt_path=self.data[index]
         image = Image.open(image_path).convert('RGB')

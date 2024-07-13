@@ -112,7 +112,7 @@ def calculate_params_flops(model,size=480,logger=None):
 
 
 def set_cuda():
-    gpu_id='6'
+    gpu_id='4'
     seed = 42
     os.environ["CUDA_VISIBLE_DEVICES"] = gpu_id
     set_seed(seed)

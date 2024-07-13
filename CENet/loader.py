@@ -11,6 +11,7 @@ def get_loader(datasets,batch_size,image_size,mode):
         transformer=Train_Transformer(image_size)
     else:
         transformer=Test_Transformer(image_size)
+        batch_size=1
     if datasets=='ISIC2018':
         dataset=ISIC2018_Datasets(mode=mode,transformer=transformer)
     elif datasets=='ISIC2017':
