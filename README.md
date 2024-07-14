@@ -6,10 +6,11 @@
 
     1.The introduction of models:
     (1)CNN_* are CNN-based models. Mamba_* are Mamba-based models.
-    2.The metrics:													
-![image](https://github.com/user-attachments/assets/7925dc7c-c87b-4f1e-aeaf-2c0811e2642e)	
-![image](https://github.com/user-attachments/assets/dee41356-d7ee-42bb-9a42-cc903224de2f)								
-![image](https://github.com/user-attachments/assets/cf43db41-da91-4007-a744-c29c08b22c70)
+    2.The metrics:																			
+![image](https://github.com/user-attachments/assets/b5e7274b-f82c-4214-a686-3bb599a95677)
+![image](https://github.com/user-attachments/assets/ad398870-3873-44c5-bc23-8f01fd60aae5)						
+![image](https://github.com/user-attachments/assets/2954ddc9-e08f-48c1-9286-acb8718c9fad)
+
 
 3.Prepare datasets：
 
