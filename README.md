@@ -8,9 +8,8 @@
     (1)CNN_* are CNN-based models. Mamba_* are Mamba-based models.
     2.The metrics:													
 ![image](https://github.com/user-attachments/assets/7925dc7c-c87b-4f1e-aeaf-2c0811e2642e)	
-![image](https://github.com/user-attachments/assets/dee41356-d7ee-42bb-9a42-cc903224de2f)						
-![image](https://github.com/user-attachments/assets/7fb5f90a-6f63-4fa6-9cca-10dab1e30175)
-
+![image](https://github.com/user-attachments/assets/dee41356-d7ee-42bb-9a42-cc903224de2f)								
+![image](https://github.com/user-attachments/assets/cf43db41-da91-4007-a744-c29c08b22c70)
 
 3.Prepare datasets：
 
