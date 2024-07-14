@@ -6,9 +6,10 @@
 
     1.The introduction of models:
     (1)CNN_* are CNN-based models. Mamba_* are Mamba-based models.
-    2.The metrics:
-    (1)ISIC2018:0.817	0.899	0.945	0.969	0.984	0.913	0.984	0.904
-![image](https://github.com/user-attachments/assets/0903f864-2700-4155-badc-39c2d1d5b282)
+    2.The metrics:						
+![image](https://github.com/user-attachments/assets/3b93e256-2891-4af6-b20d-dd09726f02c4)				
+![image](https://github.com/user-attachments/assets/8860b7b1-8675-4af4-930a-962217930e06)									
+![image](https://github.com/user-attachments/assets/dffdee59-b22b-4f80-b428-fc1c8bfea75c)
 
 
 3.Prepare datasets：
