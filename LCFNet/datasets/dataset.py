@@ -45,34 +45,20 @@ class ISIC2018_Datasets(Dataset):
         elif mode==TEST:
             self.data=self.data[2074:2594]
         print(len(self.data))
-        self.data_buf=self.cuda_buffer()
-        
+
     
-    def cuda_buffer(self):
-        data_buf=[]
-        i=0
-        for data in self.data:
-            image_path,gt_path=data
-            image = Image.open(image_path).convert('RGB')
-            image=np.array(image)
-            image = np.transpose(image, axes=(2, 0, 1))
-            gt = Image.open(gt_path).convert('L')
-            gt = np.array(gt)
-            gt=np.expand_dims(gt, axis=2) / 255
-            gt = np.transpose(gt, axes=(2, 0, 1))
-            image, gt = self.transformer((image, gt))
-            image=image.cuda()
-            gt=gt.cuda()
-            data_buf.append([image,gt])
-            i=i+1
-            if i%50==0:
-                print(i)
-        return data_buf
+
 
     def __getitem__(self, index):
-        image, gt=self.data_buf[index]
-        image=image.cpu()
-        gt=gt.cpu()
+        image_path, gt_path=self.data[index]
+        image = Image.open(image_path).convert('RGB')
+        image=np.array(image)
+        image = np.transpose(image, axes=(2, 0, 1))
+        gt = Image.open(gt_path).convert('L')
+        gt = np.array(gt)
+        gt=np.expand_dims(gt, axis=2) / 255
+        gt = np.transpose(gt, axes=(2, 0, 1))
+        image, gt = self.transformer((image, gt))
         return image,gt
 
     def __len__(self):
@@ -105,30 +91,19 @@ class ISIC2017_Datasets(Dataset):
         random.shuffle(self.data)
         self.transformer=transformer
         print(len(self.data))
-        self.data_buf=self.cuda_buffer()
+
         
-    
-    def cuda_buffer(self):
-        data_buf=[]
-        for data in self.data:
-            image_path,gt_path=data
-            image = Image.open(image_path).convert('RGB')
-            image=np.array(image)
-            image = np.transpose(image, axes=(2, 0, 1))
-            gt = Image.open(gt_path).convert('L')
-            gt = np.array(gt)
-            gt=np.expand_dims(gt, axis=2) / 255
-            gt = np.transpose(gt, axes=(2, 0, 1))
-            image, gt = self.transformer((image, gt))
-            image=image.cuda()
-            gt=gt.cuda()
-            data_buf.append([image,gt])
-        return data_buf
             
     def __getitem__(self, index):
-        image, gt=self.data_buf[index]
-        image=image.cpu()
-        gt=gt.cpu()
+        image_path, gt_path=self.data[index]
+        image = Image.open(image_path).convert('RGB')
+        image=np.array(image)
+        image = np.transpose(image, axes=(2, 0, 1))
+        gt = Image.open(gt_path).convert('L')
+        gt = np.array(gt)
+        gt=np.expand_dims(gt, axis=2) / 255
+        gt = np.transpose(gt, axes=(2, 0, 1))
+        image, gt = self.transformer((image, gt))
         return image,gt
 
     def __len__(self):
