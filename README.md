@@ -7,15 +7,7 @@
 - [Preparation](#Preparation)
 - [Run](#Run)
 - [Comparison](#Comparison)
-- [Supported Models](#supported-models)
-- [Supported Training Approaches](#supported-training-approaches)
-- [Provided Datasets](#provided-datasets)
-- [Requirement](#requirement)
-- [Getting Started](#getting-started)
-- [Projects using LLaMA Factory](#projects-using-llama-factory)
-- [License](#license)
-- [Citation](#citation)
-- [Acknowledgement](#acknowledgement)
+
 
 ## Preparation
 
