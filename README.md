@@ -1,4 +1,4 @@
-👋 [![GitHub Repo stars](https://github.com/Panpz202006/MSCNet/tree/xyq_branch)]
+👋 [GitHub Repo stars: https://github.com/Panpz202006/MSCNet/tree/xyq_branch]
 
 \[ English | [中文](README_zh.md) \]
 
