@@ -10,7 +10,8 @@
 ## Preparation
 
 - **environments**: 
-(1)configure `pytorch2.2.2+cu118` 
+(1)configure `pytorch2.2.2+cu118`
+
 (2)install `timm, mamba_ssm and tqdm` packages.
 
 
@@ -18,8 +19,11 @@
 
 (1)download datasets:
 > [!>]ISIC2017(https://challenge.isic-archive.com/data/#2017)
+
 > [!>]ISIC2018(https://challenge.isic-archive.com/data/#2018)
-> [!>]PH2(https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1). 
+
+> [!>]PH2(https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1).
+
 (2)put ISIC2017 datasets into ./data/ISIC2017 folder, ISIC2018 datasets into ./data/ISIC2018 folder, and PH2 datasets into ./data/PH2 folder.
 
 - **pre-training**: this part is not provided now.
@@ -27,7 +31,8 @@
 ## Run
 
 - **example**:
-(1)enter the directory where train.py is located. 
+(1)enter the directory where train.py is located.
+
 (2)for training model, run followed command:
 ```bash
 python train.py --datasets ISIC2018 --backbone VGG
