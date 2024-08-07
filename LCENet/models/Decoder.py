@@ -11,16 +11,14 @@ class MSCBlock(nn.Module):
         super().__init__()
         self.sample1=sample1
         self.sample2=sample2
-        self.extract=ConvNormAct(in_channels,in_channels//8,3,padding=padding,dilation=dilation)
-        self.drop=nn.Dropout2d(0.5)
-        self.integrate=ConvNormAct(in_channels//8,in_channels//8,1)
-        self.ee=EdgeEnhance(in_channels//8)
+        self.extract=ConvNormAct(in_channels,in_channels//2,3,padding=padding,dilation=dilation)
+        self.integrate=ConvNormAct(in_channels//2,in_channels//2,1)
+        self.ee=EdgeEnhance(in_channels//2)
 
     def forward(self,x):
         if self.sample1!=None:
             x=self.sample1(x)
         x=self.extract(x)
-        x=self.drop(x)
         x=self.integrate(x)
         x=self.ee(x)
         if self.sample2!=None:
@@ -30,8 +28,8 @@ class MSCBlock(nn.Module):
 class IG(nn.Module):
     def __init__(self,in_channels):
         super().__init__()
-        self.fusion=ConvNormAct(in_channels,in_channels,3,padding=1)
-        self.drop=nn.Dropout2d(0.5),
+        self.fusion=ConvNormAct(in_channels*4,in_channels,3,padding=1)
+        self.drop=nn.Dropout2d(0.2)
         self.local=ConvNormAct(in_channels,in_channels,1)
         self.ee=EdgeEnhance(in_channels)
         self.ca=ChannelAttention(in_channels)
@@ -75,12 +73,11 @@ class DecoderBlock(nn.Module):
         self.msc=MSC(in_channels)
         self.ig=IG(in_channels)
         self.relu=nn.ReLU()
-        self.drop=nn.Dropout2d(0.5)
 
     def forward(self,x):
         short_cut=x
         x=self.msc(x)
-        x=self.drop(self.ig(x)+short_cut)
+        x=self.relu(self.ig(x)+short_cut)
         return x
     
 class CatFuse(nn.Module):

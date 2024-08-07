@@ -5,14 +5,11 @@ from micro import DAE_FORMER, ULTRALIGHT_VM_UNET, VGG, TRAIN, VAL, VMUNET
 from models.Model import Model
 sys.path.append(os.getcwd())
 from utils.loss_function import BceDiceLoss, BceIOULoss
-from utils.tools import continue_train, get_logger, get_optimizer, get_scheduler, set_cuda,calculate_params_flops
+from utils.tools import continue_train, get_logger, set_cuda,calculate_params_flops
 import torch
 from train_val_epoch import train_epoch,val_epoch
 import argparse
 
-'''-----------------------------------------------------
----------------------args-------------------------------
---------------------------------------------------------'''
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "--datasets",
@@ -24,7 +21,7 @@ parser.add_argument(
     "--backbone",
     type=str,
     default=ULTRALIGHT_VM_UNET,
-    help="input VGG, VMUNet, or UltraLight_VM_UNet",
+    help="input VGG, VMUNet, UltraLight_VM_UNet, or DAE_Former",
 )
 parser.add_argument(
     "--batchsize",
@@ -36,7 +33,7 @@ parser.add_argument(
     "--imagesize",
     type=int,
     default=256,
-    help="input image resolution. 224 for VGG; 256 for VMUNet",
+    help="input image resolution.",
 )
 parser.add_argument(
     "--log",
@@ -63,9 +60,6 @@ parser.add_argument(
     help="gpu id",
 )
 
-'''-----------------------------------------------------
----------------------model-------------------------------
---------------------------------------------------------'''
 def get_model():
     if args.backbone==VGG:
         model=Model(in_channels=[64,128,256,512,512],scale_factor=[1,2,4,8,16],model=VGG)
@@ -77,9 +71,6 @@ def get_model():
         model=Model(in_channels=[64,128,256],scale_factor=[4,8,16],model=DAE_FORMER)
     model = model.cuda()
     return model
-'''-----------------------------------------------------
----------------------train-------------------------------
---------------------------------------------------------'''
 
 def train(args):
     #init_checkpoint folder
@@ -90,9 +81,6 @@ def train(args):
     logger = get_logger('train', os.path.join(os.getcwd(),args.log))
     #initialization cuda
     set_cuda(gpu_id=args.gpuid)
-    #get loader
-    train_loader=get_loader(args.datasets,args.batchsize,args.imagesize,mode=TRAIN)
-    val_loader=get_loader(args.datasets,args.batchsize,args.imagesize,mode=VAL)
     #get model
     model=get_model()
     #calculate parameters and flops
@@ -100,22 +88,37 @@ def train(args):
     #set loss function
     criterion=BceDiceLoss()
     #set optim
-    optimizer = get_optimizer(model)
-    #set scheduler
-    scheduler = get_scheduler(optimizer)
-
-    #running settings
-    min_loss=1000
-    start_epoch=0
-    end_epoch=200
-    steps=0
+    optimizer = torch.optim.AdamW(
+            model.parameters(), 
+            lr = 0.001,
+            betas = (0.9,0.999),
+            eps = 1e-8,
+            weight_decay = 1e-2,
+            amsgrad = False
+        )
+    
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
+            optimizer,
+            T_max = 50,
+            eta_min = 0.00001,
+            last_epoch = -1
+        )
     #Do continue to run?
     if args.continues:
         model,start_epoch,min_loss,optimizer=continue_train(model,optimizer,checkpoint_path)
         lr=optimizer.state_dict()['param_groups'][0]['lr']
         print(f'start_epoch={start_epoch},min_loss={min_loss},lr={lr}')
+    #get loader
+    train_loader=get_loader(args.datasets,args.batchsize,args.imagesize,mode=TRAIN)
+    val_loader=get_loader(args.datasets,args.batchsize,args.imagesize,mode=VAL)
+
+    #running settings
+    min_loss=1000
+    start_epoch=0
+    end_epoch=0
+    steps=0
     #start to run the model
-    for epoch in range(start_epoch,end_epoch):
+    for epoch in range(start_epoch, end_epoch):
         torch.cuda.empty_cache()
         #train model
         steps=train_epoch(train_loader,model,criterion,optimizer,scheduler,epoch, steps,logger,save_cycles=20)

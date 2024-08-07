@@ -47,26 +47,31 @@ def set_seed(seed):
 
 
 
-def get_optimizer(model):
+def get_optimizer(config, model):
     return torch.optim.AdamW(
-            model.parameters(), 
-            lr = 0.001,
-            betas = (0.9,0.999),
-            eps = 1e-8,
-            weight_decay = 1e-2,
-            amsgrad = False
+            model.parameters(),
+            lr = config['lr'],
+            betas = config['betas'],
+            eps = config['eps'],
+            weight_decay = config['weight_decay'],
+            amsgrad = config['amsgrad']
         )
-    
-    
 
-def get_scheduler(optimizer):
+
+def get_scheduler(config, optimizer):
+    '''
     return torch.optim.lr_scheduler.CosineAnnealingLR(
             optimizer,
-            T_max = 50,
-            eta_min = 0.00001,
-            last_epoch = -1
+            T_max = config.T_max,
+            eta_min = config.eta_min,
+            last_epoch = config.last_epoch
         )
-
+    '''
+    return torch.optim.lr_scheduler.StepLR(
+            optimizer,
+            step_size=config['step_size'],
+            gamma=config['gamma']
+        )
 
 
 def save_imgs(img, msk, msk_pred, id, image_root,threshold=0.5):
@@ -112,7 +117,7 @@ def set_cuda(gpu_id='6'):
     set_seed(seed)
     torch.cuda.empty_cache()
 
-def continue_train(model,optimizer=None,checkpoint_path=None):
+def continue_train(model,optimizer,checkpoint_path):
     path=os.path.join(checkpoint_path,'best.pth')
     if not os.path.exists(path):
         os.makedirs(path)
@@ -121,11 +126,18 @@ def continue_train(model,optimizer=None,checkpoint_path=None):
     start_epoch=int(loaded_data['epoch'])+1
     min_loss=float(loaded_data['min_loss'])
     model.load_state_dict(loaded_data['model_state_dict'])
-    if optimizer!=None:
-        optimizer.load_state_dict(loaded_data['optimizer_state_dict'])
-        print('继续训练')
-        return model,start_epoch,min_loss,optimizer
-    else:
-        print('开始测试')
-        return model,start_epoch,min_loss
+    optimizer.load_state_dict(loaded_data['optimizer_state_dict'])
+    print('继续训练')
+    return model,start_epoch,min_loss,optimizer
 
+def continue_test(model,checkpoint_path):
+    path=os.path.join(checkpoint_path,'best.pth')
+    if not os.path.exists(path):
+        os.makedirs(path)
+    print(path)
+    loaded_data = torch.load(path)
+    start_epoch=int(loaded_data['epoch'])+1
+    min_loss=float(loaded_data['min_loss'])
+    model.load_state_dict(loaded_data['model_state_dict'])
+    print('继续训练')
+    return model,start_epoch,min_loss

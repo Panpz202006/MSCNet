@@ -11,7 +11,7 @@ from micro import TEST, TRAIN, VAL
 class ISIC2018_Datasets(Dataset):
     def __init__(self,mode,transformer):
         super().__init__()
-        cwd=os.getcwd()
+        # cwd=os.getcwd()
         ''' 按照Inter-Scale Dependency Modeling for Skin Lesion Segmentation with Transformer-based Network, 划分数据集
         '''
         # if mode==TRAIN:
@@ -46,8 +46,6 @@ class ISIC2018_Datasets(Dataset):
             self.data=self.data[2074:2594]
         print(len(self.data))
 
-    
-
 
     def __getitem__(self, index):
         image_path, gt_path=self.data[index]
@@ -59,6 +57,8 @@ class ISIC2018_Datasets(Dataset):
         gt=np.expand_dims(gt, axis=2) / 255
         gt = np.transpose(gt, axes=(2, 0, 1))
         image, gt = self.transformer((image, gt))
+        if self.mode==TEST:
+            return image,gt,image_path.split('/')[-1]
         return image,gt
 
     def __len__(self):
@@ -69,7 +69,8 @@ class ISIC2018_Datasets(Dataset):
 class ISIC2017_Datasets(Dataset):
     def __init__(self,mode,transformer):
         super().__init__()
-        cwd=os.getcwd()
+        self.mode=mode
+        cwd='/data_home/home/xyq1/models/xyq_folers/folder_model3/ARNet/Datasets'
         if mode==TRAIN:
             gts_path=os.path.join(cwd,'data','ISIC2017','ISIC-2017_Training_Part1_GroundTruth','ISIC-2017_Training_Part1_GroundTruth')
             images_path=os.path.join(cwd,'data','ISIC2017','ISIC-2017_Training_Data','ISIC-2017_Training_Data')
@@ -91,9 +92,9 @@ class ISIC2017_Datasets(Dataset):
         random.shuffle(self.data)
         self.transformer=transformer
         print(len(self.data))
-
         
-            
+  
+
     def __getitem__(self, index):
         image_path, gt_path=self.data[index]
         image = Image.open(image_path).convert('RGB')
@@ -104,6 +105,8 @@ class ISIC2017_Datasets(Dataset):
         gt=np.expand_dims(gt, axis=2) / 255
         gt = np.transpose(gt, axes=(2, 0, 1))
         image, gt = self.transformer((image, gt))
+        if self.mode==TEST:
+            return image,gt,image_path.split('/')[-1]
         return image,gt
 
     def __len__(self):
@@ -114,7 +117,8 @@ class ISIC2017_Datasets(Dataset):
 class PH2_Datasets(Dataset):
     def __init__(self,mode,transformer):
         super().__init__()
-        cwd=os.getcwd()
+        self.mode=mode
+        cwd='/data_home/home/xyq1/models/xyq_folers/folder_model3/ARNet/Datasets'
         images_path=os.path.join(cwd,'data','PH2','PH2Dataset','PH2 Dataset images')
         images_list=sorted(os.listdir(images_path))
         random.shuffle(images_list)
@@ -123,13 +127,12 @@ class PH2_Datasets(Dataset):
             image_path=os.path.join(images_path,path,path+'_Dermoscopic_Image',path+'.bmp')
             gt_path=os.path.join(images_path,path,path+'_lesion',path+'_lesion.bmp')
             self.data.append([image_path, gt_path])
-        limit=int(len(self.data)*0.8)
         if mode==TRAIN:
-            self.data=self.data[:limit]
+            self.data=self.data[:160]
         if mode==VAL:
-            self.data=self.data[limit:]
+            self.data=self.data[160:180]
         if mode==TEST:
-            self.data=self.data[limit:]
+            self.data=self.data[180:200]
         self.transformer=transformer
         print(f'the length of datasets is {len(self.data)}')
     
@@ -143,8 +146,9 @@ class PH2_Datasets(Dataset):
         gt=np.expand_dims(gt, axis=2) / 255
         gt = np.transpose(gt, axes=(2, 0, 1))
         image, gt = self.transformer((image, gt))
+        if self.mode==TEST:
+            return image,gt,image_path.split('/')[-1]
         return image,gt
 
     def __len__(self):
         return len(self.data)
-    

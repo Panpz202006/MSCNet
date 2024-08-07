@@ -9,7 +9,7 @@ from mamba_ssm import Mamba
 
 class UltraLight_VM_UNet(nn.Module):
     
-    def __init__(self, input_channels=3, c_list=[16,32,64,128,256,512]):
+    def __init__(self, input_channels=3, c_list=[8,16,32,64,128,256]):
         super().__init__()
         print(c_list)
         self.encoder1 = nn.Sequential(

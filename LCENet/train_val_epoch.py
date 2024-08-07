@@ -12,7 +12,7 @@ def val_epoch(val_loader,model,criterion,logger):
     loss_list=[]
     preds = []
     gts = []
-    id=0
+
     with torch.no_grad():
         for data in tqdm(val_loader):
             images, gt = data
@@ -22,13 +22,9 @@ def val_epoch(val_loader,model,criterion,logger):
             loss = criterion(pred[0],gt)
             #计算损失
             loss_list.append(loss.item())
-            # save_imgs(images, 
-            #           gt.squeeze(1).cpu().detach().numpy(), 
-            #           pred[0].squeeze(1).cpu().detach().numpy(), 
-            #           id, os.path.join(os.getcwd(),'Test','UltraLight_VM_UNet','images'))
             gts.append(gt.squeeze(1).cpu().detach().numpy())
             preds.append(pred[0].squeeze(1).cpu().detach().numpy()) 
-            id=id+1
+
     log_info=get_metrics(preds,gts)
     log_info=f'val loss={np.mean(loss_list):.4f}  {log_info}'
     print(log_info)
@@ -55,7 +51,6 @@ def train_epoch(train_loader,model,criterion,optimizer,scheduler,epoch,steps,log
         if step%save_cycles==0:
             lr=optimizer.state_dict()['param_groups'][0]['lr']
             log_info=f'train: epoch={epoch}, step={step}, loss={np.mean(loss_list):.4f}, lr={lr:.7f}'
-            print(log_info)
             logger.info(log_info)
     scheduler.step()
     return step

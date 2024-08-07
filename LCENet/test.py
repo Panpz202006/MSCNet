@@ -3,11 +3,11 @@ import os
 import time
 from loader import get_loader
 import imageio
-from micro import TEST, ULTRALIGHT_VM_UNET, VGG, TRAIN, VAL, VMUNET,DAE_FORMER
+from micro import DAE_FORMER, TEST, ULTRALIGHT_VM_UNET, VGG, TRAIN, VAL, VMUNET
 from models.Model import Model
 sys.path.append(os.getcwd())
 from utils.loss_function import BceDiceLoss, BceIOULoss
-from utils.tools import continue_train, get_logger, set_cuda,calculate_params_flops
+from utils.tools import continue_test, continue_train, get_logger, set_cuda,calculate_params_flops
 from train_val_epoch import train_epoch,val_epoch
 import argparse
 import torch
@@ -17,14 +17,11 @@ from utils.loss_function import adjust_lr, clip_gradient, get_metrics
 from PIL import Image
 from matplotlib import pyplot as plt
 
-'''-----------------------------------------------------
----------------------args-------------------------------
---------------------------------------------------------'''
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "--datasets",
     type=str,
-    default="ISIC2018",
+    default="PH2",
     help="input datasets name including ISIC2017, ISIC2018, and PH2",
 )
 parser.add_argument(
@@ -57,31 +54,19 @@ parser.add_argument(
     default='Test',
     help="the folder is saving test results",
 )
-parser.add_argument(
-    "--gpuid",
-    type=str,
-    default='2',
-    help="gup id",
-)
 
-'''-----------------------------------------------------
----------------------model-------------------------------
---------------------------------------------------------'''
 def get_model():
     if args.backbone==VGG:
-        model=Model(in_channels=[64,128,256,512,512],scale_factor=[1,2,4,8,16],model=VGG)
+        model=Model(in_channels=[16,32,64,128,256],scale_factor=[1,2,4,8,16],model=VGG)
     if args.backbone==VMUNET:
         model=Model(in_channels=[64,128,256,256],scale_factor=[4,8,16,32],model=VMUNET)
     if args.backbone==ULTRALIGHT_VM_UNET:
         model=Model(in_channels=[8,16,32,64,128,256],scale_factor=[1,2,4,8,16,32],model=ULTRALIGHT_VM_UNET)
     if args.backbone==DAE_FORMER:
-        model=Model(in_channels=[64,128,256],scale_factor=[4,8,16],model=DAE_FORMER)
+        model=Model(in_channels=[8,16,32,64,128,256],scale_factor=[4,8,16],model=DAE_FORMER)
     model = model.cuda()
     return model
 
-'''-----------------------------------------------------
----------------------save images-------------------------------
---------------------------------------------------------'''
 def save_imgs(img, msk, msk_pred, id, image_root,threshold=0.5):
     img = img.squeeze(0).permute(1,2,0).detach().cpu().numpy()
     img = img / 255. if img.max() > 1.1 else img
@@ -105,9 +90,7 @@ def save_imgs(img, msk, msk_pred, id, image_root,threshold=0.5):
     plt.close()
 
 
-'''-----------------------------------------------------
----------------------test-------------------------------
---------------------------------------------------------'''
+
 def test_epoch(test_loader,model,criterion,logger,path):
     image_root =  os.path.join(path,'images')
     gt_root =  os.path.join(path,'gt')
@@ -126,7 +109,7 @@ def test_epoch(test_loader,model,criterion,logger,path):
     time_sum=0
     with torch.no_grad():
         for data in tqdm(test_loader):
-            images, gt = data
+            images, gt,image_name = data
             images, gt = images.cuda(non_blocking=True).float(), gt.cuda(non_blocking=True).float()
             time_start = time.time()
             pred = model(images)
@@ -139,7 +122,7 @@ def test_epoch(test_loader,model,criterion,logger,path):
             save_imgs(images, 
                       gt.squeeze(1).cpu().detach().numpy(), 
                       pred[0].squeeze(1).cpu().detach().numpy(), 
-                      id, image_root)
+                      image_name, image_root)
 
             gts.append(gt.squeeze(1).cpu().detach().numpy())
             preds.append(pred[0].squeeze(1).cpu().detach().numpy()) 
@@ -159,19 +142,22 @@ def test(args):
     #logger
     logger = get_logger('test', os.path.join(os.getcwd(),args.log))
     #initialization cuda
-    set_cuda(gpu_id=args.gupid)
+    set_cuda(gpu_id='5')
     #get loader
     test_loader=get_loader(args.datasets,1,args.imagesize,mode=TEST)
+    
     #get model
     model=get_model()
     #calculate parameters and flops
     calculate_params_flops(model,size=args.imagesize,logger=logger)
     #set loss function
     criterion=BceDiceLoss()
+    
     #Do continue to run?
-    model,_,_,_=continue_train(model=model,checkpoint_path=checkpoint_path)
+    model,_,_=continue_test(model=model,checkpoint_path=checkpoint_path)
     #start to run the model
     test_epoch(test_loader,model,criterion,logger,os.path.join(os.getcwd(),'Test',args.backbone))
+
 
 
 if __name__ == '__main__':
