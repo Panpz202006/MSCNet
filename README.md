@@ -10,40 +10,29 @@
 ## Preparation
 
 - **environments**: 
-(1)configure `pytorch2.2.2+cu118`
 
-(2)install `timm, mamba_ssm and tqdm` packages.
+> configure `pytorch2.2.2+cu118` 
+
+> install `timm, mamba_ssm and tqdm` packages.
 
 
 - **datasets**: 
 
-(1)download datasets:
-> [!>]ISIC2017(https://challenge.isic-archive.com/data/#2017)
+> download datasets: ISIC2017`https://challenge.isic-archive.com/data/#2017`, ISIC2018`https://challenge.isic-archive.com/data/#2018`, and PH2`https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1`.  
 
-> [!>]ISIC2018(https://challenge.isic-archive.com/data/#2018)
-
-> [!>]PH2(https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1).
-
-(2)put ISIC2017 datasets into ./data/ISIC2017 folder, ISIC2018 datasets into ./data/ISIC2018 folder, and PH2 datasets into ./data/PH2 folder.
+> foolder organization: put ISIC2017 datasets into ./data/ISIC2017 folder, ISIC2018 datasets into ./data/ISIC2018 folder, and PH2 datasets into ./data/PH2 folder.
 
 - **pre-training**: this part is not provided now.
 
 ## Run
 
 - **example**:
-(1)enter the directory where train.py is located.
 
-(2)for training model, run followed command:
-```bash
-python train.py --datasets ISIC2018 --backbone VGG
-```
-This command denotes to train on ISIC2018 datasets and to adopt VG as backbone. Concrete information see train.py, please. Training records is saved to ./log folder. 
-(2)for testing model, run followed command:
-```bash
-python train.py --datasets ISIC2018 --backbone VGG
-```
-This command denotes to test on ISIC2018 datasets and to adopt VG as backbone. Concrete information see test.py, please. Testing records is saved to ./log folder.
+> enter the directory where train.py is located. 
 
+> train model, `python train.py --datasets ISIC2018 --backbone VGG`, which denotes to train on ISIC2018 datasets and to adopt VGG as backbone. Concrete information see train.py, please. Training records is saved to ./log folder, and pre-training file is saved to ./checkpoints/VGG.
+
+> test model, `python train.py --datasets ISIC2018 --backbone UltraLight_VM_UNet`, which denotes to test on ISIC2018 datasets and to adopt UltraLight_VM_UNet as backbone. Concrete information see test.py, please. Testing records is saved to ./log folder, pre-training file is saved to ./checkpoints/UltraLight_VM_UNet, and testing results are saved to ./Test/UltraLight_VM_UNet/images.
 
 ## Comparison
 
