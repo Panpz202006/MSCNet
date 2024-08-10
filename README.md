@@ -22,7 +22,6 @@
 
 > foolder organization: put ISIC2017 datasets into ./data/ISIC2017 folder, ISIC2018 datasets into ./data/ISIC2018 folder, and PH2 datasets into ./data/PH2 folder.
 
-- **pre-training**: this part is not provided now.
 
 ## Run
 
@@ -37,4 +36,6 @@
 ## Comparison
 
 - **quantitation**:No
-- **vision**:No
+- **vision**:
+<img width="1422" alt="comparative" src="https://github.com/user-attachments/assets/6ddae633-2daa-45f2-b661-76bbb280bf17">
+
