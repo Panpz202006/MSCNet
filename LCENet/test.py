@@ -138,7 +138,7 @@ def test_epoch(test_loader,model,criterion,logger,path):
 
 def test(args):
     #init_checkpoint folder
-    checkpoint_path=os.path.join(os.getcwd(),args.checkpoint,args.backbone)
+    checkpoint_path=os.path.join(os.getcwd(),args.checkpoint,args.backbone,args.datasets)
     #logger
     logger = get_logger('test', os.path.join(os.getcwd(),args.log))
     #initialization cuda
@@ -156,7 +156,7 @@ def test(args):
     #Do continue to run?
     model,_,_=continue_test(model=model,checkpoint_path=checkpoint_path)
     #start to run the model
-    test_epoch(test_loader,model,criterion,logger,os.path.join(os.getcwd(),'Test',args.backbone))
+    test_epoch(test_loader,model,criterion,logger,os.path.join(os.getcwd(),'Test',args.backbone,args.datasets))
 
 
 
