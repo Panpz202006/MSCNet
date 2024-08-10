@@ -50,7 +50,8 @@ In recent years, medical image segmentation has garnered widespread attention. H
 ## Comparison
 
 - **quantitation**:
-![image](https://github.com/user-attachments/assets/977b7198-c5a7-4a99-a8b8-8629931c8319)
+![image](https://github.com/user-attachments/assets/a958ff8d-01af-47f5-b38e-fd8acc7e1b34)
+
 
 - **vision**:
 <img width="1422" alt="comparative" src="https://github.com/user-attachments/assets/6ddae633-2daa-45f2-b661-76bbb280bf17">
