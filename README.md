@@ -22,7 +22,11 @@
 
 > foolder organization: put ISIC2017 datasets into ./data/ISIC2017 folder, ISIC2018 datasets into ./data/ISIC2018 folder, and PH2 datasets into ./data/PH2 folder.
 
+- **pre-training files**:
 
+> the format of the file path: /checkpoints/backbone_name/dataset_name/filename.pth
+
+  
 ## Run
 
 - **example**:
@@ -33,6 +37,11 @@
 
 > test model, `python train.py --datasets ISIC2018 --backbone UltraLight_VM_UNet`, which denotes to test on ISIC2018 datasets and to adopt UltraLight_VM_UNet as backbone. Concrete information see test.py, please. Testing records is saved to ./log folder, pre-training file is saved to ./checkpoints/UltraLight_VM_UNet, and testing results are saved to ./Test/UltraLight_VM_UNet/images.
 
+- **prediction maps**:
+  
+> the format of the file path:  /Test/backbone_name/dataset_name/picture_name.png
+
+  
 ## Comparison
 
 - **quantitation**:No
