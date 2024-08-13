@@ -34,20 +34,6 @@ class SpatialAttention(nn.Module):
         return out*x+x
 
 
-
-# class EdgeEnhance(nn.Module):
-#     def __init__(self,in_channels):
-#         super().__init__()
-#         self.AP=nn.AvgPool2d(3,1,1)
-#         self.sig=nn.Sigmoid()
-#         self.conv=ConvNormAct(in_channels,in_channels,1,act=nn.Sigmoid)
-
-#     def forward(self,x):
-#         x_ap=self.conv(x-self.AP(x))
-#         x_ee=x_ap*x+x
-#         return x_ee
-
-
 class EdgeEnhance(nn.Module):
     def __init__(self,in_channels):
         super().__init__()

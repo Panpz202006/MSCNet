@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 from micro import VGG
-from models.Decoder import Decoder, Final_Projection
+from models.Decoder import Decoder,Final_Supervise
 from models.Encoder import Encoder
 
 class Model(nn.Module):
@@ -10,7 +10,7 @@ class Model(nn.Module):
         super().__init__()
         self.encoder=Encoder(in_channels,model=model)
         self.decoder=Decoder(in_channels)
-        self.final=Final_Projection(in_channels,scale_factor)
+        self.final=Final_Supervise(in_channels,scale_factor)
 
     def forward(self,x):
         x=self.encoder(x)

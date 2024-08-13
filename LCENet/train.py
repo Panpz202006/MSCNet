@@ -115,7 +115,7 @@ def train(args):
     #running settings
     min_loss=1000
     start_epoch=0
-    end_epoch=0
+    end_epoch=200
     steps=0
     #start to run the model
     for epoch in range(start_epoch, end_epoch):
