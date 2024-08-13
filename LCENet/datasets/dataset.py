@@ -11,9 +11,9 @@ from micro import TEST, TRAIN, VAL
 class ISIC2018_Datasets(Dataset):
     def __init__(self,mode,transformer):
         super().__init__()
-        # cwd=os.getcwd()
+        cwd=os.getcwd()
         self.mode=mode
-        cwd='/data_home/home/xyq1/models/xyq_folers/folder_model3/ARNet/Datasets'
+
         ''' 按照Inter-Scale Dependency Modeling for Skin Lesion Segmentation with Transformer-based Network, 划分数据集
         '''
         # if mode==TRAIN:
@@ -71,9 +71,9 @@ class ISIC2018_Datasets(Dataset):
 class ISIC2017_Datasets(Dataset):
     def __init__(self,mode,transformer):
         super().__init__()
-        # cwd=os.getcwd()
+        cwd=os.getcwd()
         self.mode=mode
-        cwd='/data_home/home/xyq1/models/xyq_folers/folder_model3/ARNet/Datasets'
+
         if mode==TRAIN:
             gts_path=os.path.join(cwd,'data','ISIC2017','ISIC-2017_Training_Part1_GroundTruth','ISIC-2017_Training_Part1_GroundTruth')
             images_path=os.path.join(cwd,'data','ISIC2017','ISIC-2017_Training_Data','ISIC-2017_Training_Data')
@@ -121,7 +121,7 @@ class PH2_Datasets(Dataset):
     def __init__(self,mode,transformer):
         super().__init__()
         self.mode=mode
-        cwd='/data_home/home/xyq1/models/xyq_folers/folder_model3/ARNet/Datasets'
+        cwd=os.getcwd()
         images_path=os.path.join(cwd,'data','PH2','PH2Dataset','PH2 Dataset images')
         images_list=sorted(os.listdir(images_path))
         random.shuffle(images_list)
