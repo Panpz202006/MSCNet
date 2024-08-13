@@ -51,7 +51,8 @@
 ## Comparison
 
 - **quantitation**:
-![image](https://github.com/user-attachments/assets/00ab7ac6-e1ed-41ad-9a9f-e21a9acd7ca4)
+![image](https://github.com/user-attachments/assets/db408a6a-8ecf-4f7c-8a42-2f3f2f41ba29)
+
 
 
 
