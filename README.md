@@ -21,9 +21,9 @@
 
 - **environments**: 
 
-> configure `pytorch2.2.2+cu118` 
-
-> install `timm, mamba_ssm and tqdm` packages.
+ `configure pytorch2.2.2+cu118` 
+ 
+ `install timm, mamba_ssm and tqdm packages.`
 
 
 - **datasets**: 
