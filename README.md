@@ -38,23 +38,23 @@ Datasets:
 
 Enter the directory: ./LCENet/ 
 
-Training
+Training:
 
 ```
 python train.py --datasets ISIC2018 --backbone UltraLight_VM_UNet
 training records is saved to ./log folder
-pre-training file is saved to ./checkpoints/VGG.
-Concrete information see ./LCENet/train.py, please. 
+pre-training file is saved to ./checkpoints/UltraLight_VM_UNet
+concrete information see ./LCENet/train.py, please
 ```
 
 Evaluation:
 
 ```
 python train.py --datasets ISIC2018 --backbone UltraLight_VM_UNet
-testing records is saved to ./log folder
+testing records is saved to ./log
 training file is saved to ./checkpoints/UltraLight_VM_UNet
-testing results are saved to ./Test/UltraLight_VM_UNet/images.
-Concrete information see ./LCENet/test.py, please. 
+testing results are saved to ./Test/UltraLight_VM_UNet/images
+concrete information see ./LCENet/test.py, please
 ```
   
 ## Results
