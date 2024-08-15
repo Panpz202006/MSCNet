@@ -30,9 +30,9 @@ Requirements:
 
 Datasets: 
 
-Download datasets: ISIC2017 [https://challenge.isic-archive.com/data/#2017](https://challenge.isic-archive.com/data/#2017), ISIC2018 [https://challenge.isic-archive.com/data/#2018](https://challenge.isic-archive.com/data/#2018), and PH2 [https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1](https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1).
+- Download datasets: ISIC2017 [https://challenge.isic-archive.com/data/#2017](https://challenge.isic-archive.com/data/#2017), ISIC2018 [https://challenge.isic-archive.com/data/#2018](https://challenge.isic-archive.com/data/#2018), and PH2 [https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1](https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1).
 
-Folder organization: put ISIC2017 datasets into ./data/ISIC2017 folder, ISIC2018 datasets into ./data/ISIC2018 folder, and PH2 datasets into ./data/PH2 folder.
+- Folder organization: put ISIC2017 datasets into ./data/ISIC2017 folder, ISIC2018 datasets into ./data/ISIC2018 folder, and PH2 datasets into ./data/PH2 folder.
   
 ## Training
 
