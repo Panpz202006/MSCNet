@@ -42,11 +42,8 @@ Training
 
 ```
 python train.py --datasets ISIC2018 --backbone UltraLight_VM_UNet
-
 Training records is saved to ./log folder
-
 pre-training file is saved to ./checkpoints/VGG.
-
 Concrete information see ./LCENet/train.py, please. 
 ```
 
