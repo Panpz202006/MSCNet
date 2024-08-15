@@ -1,8 +1,8 @@
-# LCENet: Lightweight Medical Image Segmentation via Context Extraction and Edge Enhancement
+# LCENet
 
 👋 [GitHub Repo stars: https://github.com/Panpz202006/MSCNet/tree/xyq_branch]
 
-💥 [Abstract] 💥
+💥 [Overview] 💥
 
 > In recent years, medical image segmentation has garnered significant attention. However, existing methods still struggle to effectively address issues such as blurred edges, background interferences, and complex structures.To address these issues, we propose a lightweight context extraction and edge enhancement network (LCENet), which consists of two key modules: the Multi-Scale Context Module (MSC) and the Cross-Layer Fusion Module (CLF). Specifically, MSC extracts multi-scale context information through parallel dilated convolutions to establish long-range dependency, aiming to obtain multi-scale semantic information. It also accurately delineates the boundaries of lesion areas from this information based on both spatial and channel dimensions. The CLF leverages a cross-gated mechanism to extract shallow texture details to assist high-level semantic information in locating salient regions, and employs an attention mechanism to enrich high-level semantic features, thereby efficiently highlighting the lesion areas.Extensive experiments on the ISIC2018, ISIC2017, and PH$^{2}$ datasets show that LCENet excels in five evaluation metrics.
 
@@ -19,16 +19,19 @@
 
 ## Preparation
 
-- **environments**: 
+- **Requirements**: 
 
- `configure pytorch2.2.2+cu118` 
- 
- `install timm, mamba_ssm and tqdm packages.`
+Clone this repo and install the required packages:
 
+```
+configure pytorch2.2.2+cu118
+
+install timm, mamba_ssm and tqdm packages
+```
 
 - **datasets**: 
 
-> download datasets: ISIC2017`https://challenge.isic-archive.com/data/#2017`, ISIC2018`https://challenge.isic-archive.com/data/#2018`, and PH2`https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1`.  
+download datasets: [ISIC2017] [https://challenge.isic-archive.com/data/#2017](https://challenge.isic-archive.com/data/#2017), [ISIC2018] [https://challenge.isic-archive.com/data/#2018](https://challenge.isic-archive.com/data/#2018), and [PH2] [https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1](https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1).
 
 > foolder organization: put ISIC2017 datasets into ./data/ISIC2017 folder, ISIC2018 datasets into ./data/ISIC2018 folder, and PH2 datasets into ./data/PH2 folder.
 
