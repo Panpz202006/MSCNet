@@ -19,7 +19,7 @@
 
 ## Preparation
 
-###Requirements: 
+Requirements: 
 
 - python 3.10
 - numpy 1.26.3
@@ -28,7 +28,7 @@
 - timm 0.4.12
 - mamba_ssm 1.2.0
 
-###datasets: 
+Datasets: 
 
 Download datasets: ISIC2017 [https://challenge.isic-archive.com/data/#2017](https://challenge.isic-archive.com/data/#2017), ISIC2018 [https://challenge.isic-archive.com/data/#2018](https://challenge.isic-archive.com/data/#2018), and PH2 [https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1](https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1).
 
