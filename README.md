@@ -2,18 +2,18 @@
 
 👋 [GitHub Repo stars: https://github.com/Panpz202006/MSCNet/tree/xyq_branch]
 
-## 1. Abstract
+## 1. Abstract:
 
-In recent years, medical image segmentation has garnered significant attention. However, existing methods still struggle to effectively address issues such as blurred edges, background interferences, and complex structures.To address these issues, we propose a lightweight context extraction and edge enhancement network (LCENet), which consists of two key modules: the Multi-Scale Context Module (MSC) and the Cross-Layer Fusion Module (CLF). Specifically, MSC extracts multi-scale context information through parallel dilated convolutions to establish long-range dependency, aiming to obtain multi-scale semantic information. It also accurately delineates the boundaries of lesion areas from this information based on both spatial and channel dimensions. The CLF leverages a cross-gated mechanism to extract shallow texture details to assist high-level semantic information in locating salient regions, and employs an attention mechanism to enrich high-level semantic features, thereby efficiently highlighting the lesion areas.Extensive experiments on the ISIC2018, ISIC2017, and PH$^{2}$ datasets show that LCENet excels in five evaluation metrics.
+In recent years, medical image segmentation has garnered significant attention. However, existing methods still struggle to effectively address issues such as blurred edges, background interferences, and complex structures.To address these issues, we propose a lightweight context extraction and edge enhancement network (LCENet), which consists of two key modules: the Multi-Scale Context Module (MSC) and the Cross-Layer Fusion Module (CLF). Specifically, MSC extracts multi-scale context information through parallel dilated convolutions to establish long-range dependency, aiming to obtain multi-scale semantic information. It also accurately delineates the boundaries of lesion areas from this information based on both spatial and channel dimensions. The CLF leverages a cross-gated mechanism to extract shallow texture details to assist high-level semantic information in locating salient regions, and employs an attention mechanism to enrich high-level semantic features, thereby efficiently highlighting the lesion areas.Extensive experiments on the ISIC2018, ISIC2017, and PH2 datasets show that LCENet excels in five evaluation metrics.
 
-## 2. Overview
+## 2. Overview:
 
 <div align="center">
 <img src="LCENet/Figs/network.png" />
 </div>
 
 
-## 3. Main Environments
+## 3. Main Environments:
 
 The environment installation procedure can be followed by UltraLight-VM-UNet, or by following the steps below (python=3.8):
 
@@ -37,7 +37,7 @@ pip install scikit-learn matplotlib thop h5py SimpleITK scikit-image medpy yacs
 
 - Folder organization: put ISIC2017 datasets into ./data/ISIC2017 folder, ISIC2018 datasets into ./data/ISIC2018 folder, and PH2 datasets into ./data/PH2 folder.
   
-## 5. Train the LCENet
+## 5. Train the LCENet:
 
 ```
 python train.py --datasets ISIC2018 --backbone UltraLight_VM_UNet
@@ -46,7 +46,7 @@ pre-training file is saved to ./checkpoints/UltraLight_VM_UNet
 concrete information see ./LCENet/train.py, please
 ```
 
-## 6. Test the LCENet
+## 6. Test the LCENet:
 
 ```
 python test.py --datasets ISIC2018 --backbone UltraLight_VM_UNet
@@ -55,7 +55,7 @@ testing results are saved to ./Test/UltraLight_VM_UNet/images
 concrete information see ./LCENet/test.py, please
 ```
   
-## 7. Comparison With State of the Arts
+## 7. Comparison With State of the Arts:
 
 <div align="center">
 <img src="LCENet/Figs/comparative_table.png" />
@@ -65,6 +65,6 @@ concrete information see ./LCENet/test.py, please
 <img src="LCENet/Figs/comparative.png" />
 </div>
 
-## 8. Acknowledgement
+## 8. Acknowledgement:
 
 Thanks to UltraLight-VM-UNet for his outstanding works.
