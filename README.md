@@ -10,7 +10,7 @@ In recent years, medical image segmentation has garnered significant attention. 
 
 ![network](https://github.com/user-attachments/assets/deeb9bdd-903c-410b-9e6b-84cbc549c848)
 
-## 2. Main Environments
+## 3. Main Environments
 
 The environment installation procedure can be followed by UltraLight-VM-UNet, or by following the steps below (python=3.8):
 
@@ -28,13 +28,13 @@ pip install mamba_ssm==1.0.1  # mmamba_ssm-1.0.1+cu118torch1.13cxx11abiFALSE-cp3
 pip install scikit-learn matplotlib thop h5py SimpleITK scikit-image medpy yacs
 ```
 
-## 3. Datasets: 
+## 4. Datasets: 
 
 - Download datasets: ISIC2017 from this [link](https://challenge.isic-archive.com/data/#2017), ISIC2018 from this [link](https://challenge.isic-archive.com/data/#2018), and PH2 from this [link](https://www.dropbox.com/scl/fi/epzcoqeyr1v9qlv/PH2Dataset.rar?rlkey=6mt2jlvwfkditkyg12xdei6ux&e=1).
 
 - Folder organization: put ISIC2017 datasets into ./data/ISIC2017 folder, ISIC2018 datasets into ./data/ISIC2018 folder, and PH2 datasets into ./data/PH2 folder.
   
-## 4. Train the LCENet
+## 5. Train the LCENet
 
 ```
 python train.py --datasets ISIC2018 --backbone UltraLight_VM_UNet
@@ -43,7 +43,7 @@ pre-training file is saved to ./checkpoints/UltraLight_VM_UNet
 concrete information see ./LCENet/train.py, please
 ```
 
-## 5. Test the LCENet
+## 6. Test the LCENet
 
 ```
 python test.py --datasets ISIC2018 --backbone UltraLight_VM_UNet
@@ -52,12 +52,12 @@ testing results are saved to ./Test/UltraLight_VM_UNet/images
 concrete information see ./LCENet/test.py, please
 ```
   
-## 6. Comparison With State of the Arts
+## 7. Comparison With State of the Arts
 
 ![image](https://github.com/user-attachments/assets/db408a6a-8ecf-4f7c-8a42-2f3f2f41ba29)
 
 <img width="1422" alt="comparative" src="https://github.com/user-attachments/assets/6ddae633-2daa-45f2-b661-76bbb280bf17">
 
-## 7. Acknowledgement
+## 8. Acknowledgement
 
 Thanks to UltraLight-VM-UNet for his outstanding works.
