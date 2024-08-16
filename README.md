@@ -8,7 +8,10 @@ In recent years, medical image segmentation has garnered significant attention. 
 
 ## 2. Overview
 
-![network](https://github.com/user-attachments/assets/deeb9bdd-903c-410b-9e6b-84cbc549c848)
+<div align="center">
+<img src="LCENet/Figs/network.png" />
+</div>
+
 
 ## 3. Main Environments
 
@@ -54,9 +57,13 @@ concrete information see ./LCENet/test.py, please
   
 ## 7. Comparison With State of the Arts
 
-![image](https://github.com/user-attachments/assets/db408a6a-8ecf-4f7c-8a42-2f3f2f41ba29)
+<div align="center">
+<img src="LCENet/Figs/comparative_table.png" />
+</div>
 
-<img width="1422" alt="comparative" src="https://github.com/user-attachments/assets/6ddae633-2daa-45f2-b661-76bbb280bf17">
+<div align="center">
+<img src="LCENet/Figs/comparative.png" />
+</div>
 
 ## 8. Acknowledgement
 
