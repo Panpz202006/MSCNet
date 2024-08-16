@@ -2,23 +2,11 @@
 
 👋 [GitHub Repo stars: https://github.com/Panpz202006/MSCNet/tree/xyq_branch]
 
-Abstract
+## Abstract
 
 In recent years, medical image segmentation has garnered significant attention. However, existing methods still struggle to effectively address issues such as blurred edges, background interferences, and complex structures.To address these issues, we propose a lightweight context extraction and edge enhancement network (LCENet), which consists of two key modules: the Multi-Scale Context Module (MSC) and the Cross-Layer Fusion Module (CLF). Specifically, MSC extracts multi-scale context information through parallel dilated convolutions to establish long-range dependency, aiming to obtain multi-scale semantic information. It also accurately delineates the boundaries of lesion areas from this information based on both spatial and channel dimensions. The CLF leverages a cross-gated mechanism to extract shallow texture details to assist high-level semantic information in locating salient regions, and employs an attention mechanism to enrich high-level semantic features, thereby efficiently highlighting the lesion areas.Extensive experiments on the ISIC2018, ISIC2017, and PH$^{2}$ datasets show that LCENet excels in five evaluation metrics.
 
 ![network](https://github.com/user-attachments/assets/deeb9bdd-903c-410b-9e6b-84cbc549c848)
-
-
-
-## Table of Contents
-
-- [Main Environments](#Main Environments)
-- [Datasets](#Datasets)
-- [Train the LCENet](#Train the LCENet)
-- [Test the LCENet](#Test the LCENet)
-- [Comparison With State of the Arts](#Comparison With State of the Arts)
-- [Acknowledgement](#Acknowledgement)
-
 
 ## Main Environments
 
@@ -44,7 +32,7 @@ pip install scikit-learn matplotlib thop h5py SimpleITK scikit-image medpy yacs
 
 - Folder organization: put ISIC2017 datasets into ./data/ISIC2017 folder, ISIC2018 datasets into ./data/ISIC2018 folder, and PH2 datasets into ./data/PH2 folder.
   
-## Training
+## Train the LCENet
 
 ```
 python train.py --datasets ISIC2018 --backbone UltraLight_VM_UNet
@@ -53,12 +41,11 @@ pre-training file is saved to ./checkpoints/UltraLight_VM_UNet
 concrete information see ./LCENet/train.py, please
 ```
 
-## Testing
+## Test the LCENet
 
 ```
-python train.py --datasets ISIC2018 --backbone UltraLight_VM_UNet
+python test.py --datasets ISIC2018 --backbone UltraLight_VM_UNet
 testing records is saved to ./log
-training file is saved to ./checkpoints/UltraLight_VM_UNet
 testing results are saved to ./Test/UltraLight_VM_UNet/images
 concrete information see ./LCENet/test.py, please
 ```
@@ -69,6 +56,6 @@ concrete information see ./LCENet/test.py, please
 
 <img width="1422" alt="comparative" src="https://github.com/user-attachments/assets/6ddae633-2daa-45f2-b661-76bbb280bf17">
 
-##Acknowledgments
+## Acknowledgement
 
 Thanks to UltraLight-VM-UNet for his outstanding works.
